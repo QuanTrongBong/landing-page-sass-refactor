@@ -1,0 +1,13 @@
+{
+  "name": "landing-page-sass-refactor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page refactored with Sass variables, mixins and partials",
+  "scripts": {
+    "build": "sass scss/main.scss css/main.css",
+    "watch": "sass --watch scss/main.scss:css/main.css"
+  },
+  "devDependencies": {
+    "sass": "^1.105.1"
+  }
+}

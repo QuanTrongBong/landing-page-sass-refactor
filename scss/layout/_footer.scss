@@ -1,0 +1,127 @@
+@use "../abstracts/variables" as vars;
+@use "../abstracts/mixins" as mixins;
+
+.footer {
+  color: vars.$surface-color;
+  background: vars.$dark-color;
+
+  &__main {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr auto;
+    gap: 35px;
+    padding-block: 54px 45px;
+  }
+
+  &__brand-area > p {
+    margin: 17px 0 0;
+    color: rgba(vars.$surface-color, 0.6);
+    font-size: 11px;
+    line-height: 1.8;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+    h2 {
+      margin: 4px 0 5px;
+      color: rgba(vars.$surface-color, 0.48);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    a {
+      color: rgba(vars.$surface-color, 0.86);
+      font-size: 10px;
+      text-decoration: none;
+      transition: color vars.$transition-fast;
+      @include mixins.focus-visible;
+
+      &:hover {
+        color: vars.$accent-color;
+      }
+
+      span {
+        color: vars.$accent-color;
+      }
+    }
+  }
+
+  &__top {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 1px solid rgba(vars.$surface-color, 0.25);
+    border-radius: 50%;
+    color: vars.$surface-color;
+    font-size: 17px;
+    text-decoration: none;
+    transition: color vars.$transition-fast, background vars.$transition-fast;
+    @include mixins.focus-visible;
+
+    &:hover {
+      color: vars.$dark-color;
+      background: vars.$accent-color;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-block: 16px 19px;
+    border-top: 1px solid rgba(vars.$surface-color, 0.14);
+    color: rgba(vars.$surface-color, 0.48);
+    font-size: 9px;
+
+    p {
+      margin: 0;
+    }
+
+    div {
+      display: flex;
+      gap: 19px;
+    }
+
+    a {
+      text-decoration: none;
+      @include mixins.focus-visible;
+
+      &:hover {
+        color: vars.$surface-color;
+      }
+    }
+  }
+
+  @include mixins.tablet {
+    &__main {
+      grid-template-columns: 1.3fr 1fr 1fr auto;
+      gap: 20px;
+    }
+  }
+
+  @include mixins.mobile {
+    &__main {
+      grid-template-columns: 1fr 1fr;
+      gap: 30px 18px;
+    }
+
+    &__brand-area {
+      grid-column: 1 / -1;
+    }
+
+    &__top {
+      display: none;
+    }
+
+    &__bottom {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}

@@ -1,0 +1,401 @@
+@use "../abstracts/variables" as vars;
+@use "../abstracts/mixins" as mixins;
+
+.hero {
+  overflow: hidden;
+  color: vars.$surface-color;
+  background:
+    radial-gradient(ellipse at 80% 45%, rgba(vars.$primary-color, 0.3), transparent 38%),
+    vars.$dark-color;
+
+  &__layout {
+    display: grid;
+    min-height: 590px;
+    grid-template-columns: 1fr 0.9fr;
+    align-items: center;
+    gap: 35px;
+    padding-block: 62px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(48px, 6vw, 72px);
+    font-weight: 650;
+    letter-spacing: -0.075em;
+    line-height: 1.02;
+
+    span {
+      color: vars.$accent-color;
+    }
+  }
+
+  &__description {
+    max-width: 470px;
+    margin: 20px 0 25px;
+    color: rgba(vars.$surface-color, 0.72);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .button {
+    @include mixins.button-style(vars.$primary-color);
+    @include mixins.focus-visible;
+
+    span {
+      font-size: 17px;
+      font-weight: 400;
+    }
+  }
+
+  &__secondary-link {
+    color: rgba(vars.$surface-color, 0.82);
+    font-size: 11px;
+    text-decoration: none;
+    @include mixins.focus-visible;
+
+    span {
+      margin-left: 5px;
+      color: vars.$accent-color;
+    }
+  }
+
+  &__proof {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 39px;
+
+    p {
+      margin: 0;
+      color: rgba(vars.$surface-color, 0.56);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    strong {
+      color: vars.$surface-color;
+      font-size: 11px;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    color: rgba(vars.$surface-color, 0.44);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+
+    b {
+      margin-left: 7px;
+      color: vars.$accent-color;
+    }
+  }
+
+  @include mixins.tablet {
+    &__layout {
+      min-height: 550px;
+      grid-template-columns: 1fr 0.75fr;
+      gap: 10px;
+    }
+  }
+
+  @include mixins.mobile {
+    &__layout {
+      min-height: auto;
+      grid-template-columns: 1fr;
+      padding-block: 76px 48px;
+    }
+
+    &__copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    &__description {
+      font-size: 13px;
+    }
+
+    &__actions {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 17px;
+    }
+
+    &__proof {
+      margin-top: 28px;
+    }
+
+    &__bottom {
+      padding-bottom: 16px;
+    }
+  }
+}
+
+.avatar-stack {
+  display: flex;
+
+  span {
+    display: grid;
+    width: 29px;
+    height: 29px;
+    place-items: center;
+    margin-left: -7px;
+    border: 2px solid vars.$dark-color;
+    border-radius: 50%;
+    color: vars.$dark-color;
+    background: vars.$accent-color;
+    font-size: 9px;
+    font-weight: 700;
+
+    &:first-child {
+      margin-left: 0;
+      background: #f5c9a7;
+    }
+
+    &:last-child {
+      color: vars.$surface-color;
+      background: #727ed0;
+    }
+  }
+}
+
+.hero-art {
+  position: relative;
+  min-height: 390px;
+  perspective: 900px;
+
+  &__glow {
+    position: absolute;
+    top: 15%;
+    right: 8%;
+    width: 270px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(vars.$primary-color, 0.35);
+    filter: blur(68px);
+  }
+
+  &__badge {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 9%;
+    padding: 12px 16px;
+    border: 1px solid rgba(vars.$surface-color, 0.15);
+    border-radius: 5px;
+    color: vars.$surface-color;
+    background: rgba(vars.$surface-color, 0.08);
+    font-size: 10px;
+    backdrop-filter: blur(12px);
+
+    span {
+      margin-right: 6px;
+      color: vars.$accent-color;
+    }
+  }
+
+  @include mixins.mobile {
+    min-height: 305px;
+    margin-top: 10px;
+
+    &__glow {
+      right: 20%;
+      width: 210px;
+    }
+
+    &__badge {
+      right: 2%;
+      bottom: 4%;
+    }
+  }
+}
+
+.product-window {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid rgba(vars.$surface-color, 0.24);
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0 22px 55px rgba(#000, 0.3);
+
+  &--back {
+    top: 12%;
+    right: 2%;
+    width: 77%;
+    height: 67%;
+    padding: 15px;
+    background: #e7edfb;
+    transform: rotate(8deg);
+  }
+
+  &--front {
+    z-index: 2;
+    top: 24%;
+    left: 0;
+    width: 86%;
+    height: 64%;
+    transform: rotate(-5deg);
+  }
+
+  &__top {
+    display: flex;
+    height: 31px;
+    align-items: center;
+    gap: 5px;
+    padding: 0 11px;
+    border-bottom: 1px solid #ebedf1;
+    background: #fff;
+
+    > span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #e98280;
+
+      &:nth-child(2) {
+        background: #edc86c;
+      }
+
+      &:nth-child(3) {
+        background: #76c58b;
+      }
+    }
+
+    b {
+      margin-left: 7px;
+      color: #515a69;
+      font-size: 8px;
+    }
+  }
+
+  &__line {
+    width: 66%;
+    height: 7px;
+    margin: 17px 0 10px;
+    border-radius: 5px;
+    background: #c4ccda;
+
+    &--short {
+      width: 38%;
+      height: 10px;
+      margin-top: 14px;
+      background: #6778ae;
+    }
+  }
+
+  &__chart {
+    display: flex;
+    height: 105px;
+    align-items: flex-end;
+    gap: 9px;
+    padding: 12px 9px 0;
+
+    i {
+      width: 12%;
+      height: 35%;
+      border-radius: 3px 3px 0 0;
+      background: #6684dc;
+
+      &:nth-child(2n) {
+        height: 65%;
+        background: #93a8e9;
+      }
+
+      &:nth-child(3n) {
+        height: 90%;
+        background: vars.$primary-color;
+      }
+    }
+  }
+
+  &__body {
+    display: grid;
+    height: calc(100% - 31px);
+    grid-template-columns: 24% 1fr;
+  }
+
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    padding: 15px 10px;
+    background: #f5f6fa;
+
+    i {
+      width: 76%;
+      height: 5px;
+      border-radius: 4px;
+      background: #c7ccda;
+
+      &:first-child {
+        background: vars.$primary-color;
+      }
+    }
+  }
+
+  &__main {
+    padding: 9px 15px;
+  }
+
+  &__task {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 0;
+    border-bottom: 1px solid #edf0f3;
+
+    span {
+      display: grid;
+      width: 13px;
+      height: 13px;
+      place-items: center;
+      border: 1px solid #c9ced8;
+      border-radius: 3px;
+      color: vars.$surface-color;
+      background: #fff;
+      font-size: 9px;
+    }
+
+    &:first-of-type span {
+      border-color: vars.$primary-color;
+      background: vars.$primary-color;
+    }
+
+    i {
+      width: 65%;
+      height: 6px;
+      border-radius: 4px;
+      background: #d6dbe4;
+    }
+  }
+
+  &__progress {
+    height: 6px;
+    margin-top: 14px;
+    border-radius: 5px;
+    background: #edf0f4;
+
+    span {
+      display: block;
+      width: 72%;
+      height: 100%;
+      border-radius: inherit;
+      background: vars.$accent-color;
+    }
+  }
+
+  @include mixins.mobile {
+    &--front {
+      left: 3%;
+      width: 89%;
+    }
+  }
+}

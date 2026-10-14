@@ -1,0 +1,55 @@
+@use "variables" as vars;
+
+@mixin container {
+  width: min(calc(100% - 48px), vars.$container-width);
+  margin-inline: auto;
+
+  @media (max-width: vars.$breakpoint-mobile) {
+    width: calc(100% - vars.$container-mobile-gutter);
+  }
+}
+
+@mixin button-style($background: vars.$primary-color, $foreground: vars.$surface-color) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: vars.$button-padding;
+  border: 0;
+  border-radius: vars.$button-radius;
+  color: $foreground;
+  background: $background;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background vars.$transition-fast, color vars.$transition-fast, transform vars.$transition-fast;
+
+  &:hover {
+    background: vars.$primary-dark;
+    transform: translateY(-2px);
+  }
+}
+
+@mixin card-shadow {
+  box-shadow: vars.$box-shadow;
+}
+
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 3px solid vars.$accent-color;
+    outline-offset: 4px;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: vars.$breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: vars.$breakpoint-mobile) {
+    @content;
+  }
+}

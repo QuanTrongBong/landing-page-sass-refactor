@@ -1,0 +1,343 @@
+@use "../abstracts/variables" as vars;
+@use "../abstracts/mixins" as mixins;
+
+.section {
+  padding-block: 104px 112px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 36px;
+  margin-bottom: 42px;
+
+  h2 {
+    margin: 0;
+    font-size: clamp(34px, 4vw, 49px);
+    font-weight: 600;
+    letter-spacing: -0.065em;
+    line-height: 1.1;
+
+    span {
+      color: vars.$muted-color;
+    }
+  }
+
+  &__copy {
+    max-width: 320px;
+    margin: 0 0 3px;
+    color: vars.$muted-color;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  @include mixins.mobile {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 19px;
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include mixins.mobile {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.product-card {
+  overflow: hidden;
+  border: 1px solid vars.$border-color;
+  border-radius: vars.$card-radius;
+  background: vars.$surface-color;
+  transition: box-shadow vars.$transition-fast, transform vars.$transition-fast;
+
+  &:hover {
+    @include mixins.card-shadow;
+    transform: translateY(-5px);
+
+    .product-card__title > span {
+      color: vars.$surface-color;
+      background: vars.$primary-color;
+      transform: rotate(45deg);
+    }
+  }
+
+  &__visual {
+    position: relative;
+    display: grid;
+    min-height: 226px;
+    place-items: center;
+    overflow: hidden;
+
+    &--workspace {
+      background: #eaf0ff;
+    }
+
+    &--focus {
+      background: #f0edff;
+    }
+
+    &--connect {
+      background: #edf4e8;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    z-index: 1;
+    top: 15px;
+    left: 16px;
+    color: rgba(vars.$text-color, 0.62);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  &__orb {
+    position: absolute;
+    right: 22px;
+    bottom: 16px;
+    color: vars.$primary-color;
+    font-size: 25px;
+  }
+
+  &__details {
+    padding: 19px 19px 21px;
+
+    p {
+      min-height: 55px;
+      margin: 12px 0 16px;
+      color: vars.$muted-color;
+      font-size: 11px;
+      line-height: 1.75;
+    }
+
+    > a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: vars.$text-color;
+      font-size: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      @include mixins.focus-visible;
+
+      span {
+        color: vars.$primary-color;
+      }
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    h3 {
+      margin: 0;
+      font-size: 15px;
+      letter-spacing: -0.03em;
+    }
+
+    > span {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      flex: 0 0 auto;
+      place-items: center;
+      border: 1px solid vars.$border-color;
+      border-radius: 50%;
+      color: vars.$primary-color;
+      font-size: 14px;
+      transition: color vars.$transition-fast, background vars.$transition-fast, transform vars.$transition-fast;
+    }
+  }
+}
+
+.mini-board {
+  z-index: 1;
+  width: 76%;
+  padding: 11px 13px;
+  border: 1px solid rgba(vars.$primary-color, 0.1);
+  border-radius: 7px;
+  background: rgba(vars.$surface-color, 0.92);
+  box-shadow: 0 12px 24px rgba(vars.$primary-color, 0.11);
+  transform: rotate(-4deg);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #e8ebf1;
+
+    i {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #e98b85;
+
+      &:nth-child(2) {
+        background: #e8c671;
+      }
+
+      &:nth-child(3) {
+        background: #82c58c;
+      }
+    }
+
+    span {
+      margin-left: auto;
+      color: vars.$muted-color;
+      font-size: 7px;
+    }
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 1px;
+    border-bottom: 1px solid #f0f1f4;
+
+    b {
+      display: grid;
+      width: 11px;
+      height: 11px;
+      place-items: center;
+      border: 1px solid #d5d9e1;
+      border-radius: 3px;
+      color: vars.$surface-color;
+      background: vars.$primary-color;
+      font-size: 8px;
+    }
+
+    span {
+      color: #4c5361;
+      font-size: 8px;
+    }
+
+    i {
+      width: 24px;
+      height: 5px;
+      margin-left: auto;
+      border-radius: 4px;
+      background: #dce6ff;
+    }
+  }
+}
+
+.focus-clock {
+  z-index: 1;
+  display: flex;
+  width: 142px;
+  height: 142px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(vars.$primary-color, 0.23);
+  border-radius: 50%;
+  color: vars.$primary-color;
+  background: rgba(vars.$surface-color, 0.65);
+  box-shadow: 0 0 0 12px rgba(vars.$primary-color, 0.045), 0 0 0 25px rgba(vars.$primary-color, 0.035);
+
+  span {
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -0.07em;
+  }
+
+  small {
+    margin-top: 3px;
+    color: vars.$muted-color;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+  }
+
+  i {
+    width: 5px;
+    height: 5px;
+    margin-top: 9px;
+    border-radius: 50%;
+    background: vars.$primary-color;
+  }
+}
+
+.focus-note {
+  position: absolute;
+  right: 11%;
+  bottom: 20%;
+  color: #5f589b;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+  transform: rotate(8deg);
+}
+
+.connect-card {
+  z-index: 1;
+  display: flex;
+  width: 71%;
+  min-height: 134px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 17px 19px;
+  border: 1px solid rgba(#42713e, 0.12);
+  border-radius: 7px;
+  background: rgba(vars.$surface-color, 0.9);
+  box-shadow: 0 12px 26px rgba(#42713e, 0.09);
+  transform: rotate(3deg);
+
+  &__avatars {
+    display: flex;
+    margin-bottom: 12px;
+
+    b {
+      display: grid;
+      width: 23px;
+      height: 23px;
+      place-items: center;
+      margin-left: -5px;
+      border: 2px solid vars.$surface-color;
+      border-radius: 50%;
+      color: vars.$surface-color;
+      background: #d18468;
+      font-size: 8px;
+
+      &:first-child {
+        margin-left: 0;
+        background: #6c91aa;
+      }
+
+      &:last-child {
+        background: #8b72b0;
+      }
+    }
+  }
+
+  strong {
+    font-size: 13px;
+    letter-spacing: -0.03em;
+    line-height: 1.3;
+  }
+
+  > span {
+    margin-top: 10px;
+    color: vars.$muted-color;
+    font-size: 6px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+}
